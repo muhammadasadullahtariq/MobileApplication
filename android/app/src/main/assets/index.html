@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <title>Paytoday</title>
+    <script src="https://paytoday.com.na/js/pay-with-paytoday.js"></script>
+    <style>
+      .container {
+        position: relative;
+      }
+
+      .center {
+        margin-top: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="paytodaybtn" class="center">
+        <script type="text/javascript">
+          document.addEventListener('message', function (data) {
+            var details = JSON.parse(data.data);
+            const {
+              Amount,
+              Business_ID,
+              Business_Name,
+              Thank_you_URL,
+              Reference_Number,
+            } = details;
+            createButton(
+              Business_ID,
+              Business_Name,
+              Amount,
+              Thank_you_URL,
+              Reference_Number
+            );
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

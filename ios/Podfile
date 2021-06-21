@@ -1,0 +1,85 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '10.3'
+
+target 'eattcustomer' do
+  pod 'Stripe'
+  
+  rn_path = '../node_modules/react-native'
+
+  # See http://facebook.github.io/react-native/docs/integration-with-existing-apps.html#configuring-cocoapods-dependencies
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+  ]
+  
+  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+  
+    pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
+    pod 'react-native-maps', path: '../node_modules/react-native-maps'
+    pod 'react-native-google-maps', path: '../node_modules/react-native-maps'  # If you need GoogleMaps support on iOS
+    pod 'react-native-location', :path => '../node_modules/react-native-location/react-native-location.podspec'
+    pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
+
+    pod 'Firebase/Core', '~> 5.20.1'
+    pod 'Fabric', '~> 1.10.0'
+    pod 'Crashlytics', '~> 3.14'
+  pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
+
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
+  
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+
+  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
+
+  pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
+
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
+  pod 'toolbar-android', :path => '../node_modules/@react-native-community/toolbar-android'
+
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
+    if target.name == "React"
+      target.remove_from_project
+    end
+    if target.name == "yoga"
+      target.remove_from_project
+    end
+  end
+  react_project = Xcodeproj::Project.open("../node_modules/react-native/React/React.xcodeproj")
+    react_project.main_group["React/Views"].files.each do |file|   
+      if file.path.match(/^RCTWebView/) 
+        file.remove_from_project
+      end   
+    end   
+    react_project.save
+
+end

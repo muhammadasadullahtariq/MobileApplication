@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paytoday</title>
+    <style>
+        .container { 
+          height: 100px;
+          position: relative;
+          }
+        
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+    <div id="paytodaybtn" class="center">
+        <script src="https://paytoday.com.na/js/pay-with-paytoday.js"></script>
+        <script type="text/javascript">
+        document.addEventListener("message", function(data) {
+        var details = JSON.parse(data.data);
+        const { Amount,
+            Business_ID,
+            Business_Name,
+            Thank_you_URL,
+            Reference_Number} = details   
+        createButton(Business_ID, Business_Name, Amount,Thank_you_URL,Reference_Number);
+        // payWithPayPal(details.Amount, details.Business_ID);
+      })
+      </script>
+      </div>
+    </div>
+</body>
+</html>

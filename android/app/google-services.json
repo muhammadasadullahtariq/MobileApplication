@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "321895915269",
+    "firebase_url": "https://eatt-live.firebaseio.com",
+    "project_id": "eatt-live",
+    "storage_bucket": "eatt-live.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321895915269:android:15855a4e0cb06e8d32216c",
+        "android_client_info": {
+          "package_name": "com.eatt.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321895915269-t7t0al5hd0fhlogj3uhl0dlvqdiqn9qd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmtsnYFVxKN3SFT0e4JbfEllDxDebMOo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321895915269-t7t0al5hd0fhlogj3uhl0dlvqdiqn9qd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
